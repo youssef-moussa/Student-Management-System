@@ -1,0 +1,3 @@
+36217,fsdgfs,20,male,Compu,3.4
+57285,fhdsjk,22,male,electro,3.2
+52345,fsgds,21,female,Compu,3.0
