@@ -1,4 +1,5 @@
-public class Student extends Person{
+package Model;
+public class Student extends Person {
     private String StudentID;
     private String Department;
     private String GPA;

@@ -1,2 +1,3 @@
-10001,Ahmed,22,male,electro,3.2
-10002,Aly,20,male,CCE,3.4
+10003,Mohamed,23,Male,CCE,3.5
+234,hoda,20,female,CCE,2.5
+74375,youssef,20,male,CCE,2.7

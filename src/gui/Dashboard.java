@@ -3,6 +3,7 @@ package gui;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import Model.StudentDatabase;
 
 public class Dashboard extends JFrame{
     private JLabel Title;
@@ -13,7 +14,12 @@ public class Dashboard extends JFrame{
     private JButton deleteStudentButton;
     private JPanel Container;
 
-    public Dashboard(){
+    private StudentDatabase db;
+
+    public Dashboard(StudentDatabase db){
+
+        this.db = db;
+
         setContentPane(Container);
         setTitle("Student Management System");
         setMinimumSize(new java.awt.Dimension(300, 200));
@@ -22,11 +28,12 @@ public class Dashboard extends JFrame{
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setResizable(true);
         setVisible(true);
+
         AddBtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 setVisible(false);
-                //Create object from Add Panel and set it to true
+                new AddPanel(db, Dashboard.this).setVisible(true);
             }
         });
         viewStudentsButton.addActionListener(new ActionListener() {
@@ -50,5 +57,6 @@ public class Dashboard extends JFrame{
                 //Create object from Delete Panel and set it to true
             }
         });
+
     }
 }

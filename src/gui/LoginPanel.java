@@ -1,5 +1,5 @@
 package gui;
-
+import Model.StudentDatabase;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -15,7 +15,11 @@ public class LoginPanel extends JFrame {
     private JButton LoginBtn;
     private JLabel title;
 
-    public LoginPanel() {
+    private StudentDatabase db;
+
+
+    public LoginPanel(StudentDatabase db) {
+        this.db = db;
         setContentPane(Container);
         setTitle("Login");
         setMinimumSize(new java.awt.Dimension(300, 200));
@@ -37,8 +41,8 @@ public class LoginPanel extends JFrame {
                 if(isLoginValid(username, password)){
                     //Successful Login
                     setVisible(false);
-                    Dashboard dashboard = new Dashboard();
-                    dashboard.setVisible(true);
+                    new Dashboard(db);
+
                 }
                 else {
                     // Failed Login
@@ -70,7 +74,8 @@ public class LoginPanel extends JFrame {
     }
 
     public static void main(String[] args) {
-        new LoginPanel().setVisible(true);
+        StudentDatabase db = new StudentDatabase();
+        new LoginPanel(db).setVisible(true);
     }
 
 }
