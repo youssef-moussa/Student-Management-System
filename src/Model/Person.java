@@ -1,4 +1,5 @@
 package Model;
+
 public abstract class Person {
     private String FullName;
     private String Age;

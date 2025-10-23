@@ -1,3 +1,4 @@
-10003,Mohamed,23,Male,CCE,3.5
-234,hoda,20,female,CCE,2.5
-74375,youssef,20,male,CCE,2.7
+4234,gfdsgf,21,female,mecha,4.0
+9444,aly,20,male,cce,3.5
+10002,Aly,20,male,electro,3.0
+47382,fdsfd,32,male,cce,3.2
