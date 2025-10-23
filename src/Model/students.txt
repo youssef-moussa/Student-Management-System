@@ -1,0 +1,2 @@
+10001,Ahmed,22,male,electro,3.2
+10002,Aly,20,male,CCE,3.4
