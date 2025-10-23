@@ -50,7 +50,7 @@ public class Dashboard extends JFrame{
             @Override
             public void actionPerformed(ActionEvent e) {
                 setVisible(false);
-                //Create object from Delete Panel and set it to true
+                new DeletePanel(db, Dashboard.this).setVisible(true);
             }
         });
 

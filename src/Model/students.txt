@@ -1,4 +1,2 @@
-4234,gfdsgf,21,female,mecha,4.0
-9444,aly,20,male,cce,3.5
-10002,Aly,20,male,electro,3.0
+28374,Hoda,20,Male,CCE,3.2
 47382,fdsfd,32,male,cce,3.2
