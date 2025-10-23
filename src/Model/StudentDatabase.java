@@ -1,3 +1,5 @@
+package Model;
+
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -7,7 +9,8 @@ import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class StudentDatabase{
+
+public class StudentDatabase {
     protected ArrayList<Student> records;
     protected String filename;
 
@@ -15,23 +18,20 @@ public class StudentDatabase{
     public void AddStudent(){
         Scanner scanner = new Scanner(System.in);
         System.out.println("Enter Student data: ");
-        System.out.print("Student ID: ");
-        String ID = scanner.nextLine();
-        System.out.print("Student Name: ");
-        String Name = scanner.nextLine();
-        System.out.print("Student Age: ");
-        String Age = scanner.nextLine();
-        System.out.print("Student Gender: ");
-        String Gender = scanner.nextLine();
-        System.out.print("Student Department: ");
-        String Department = scanner.nextLine();
-        System.out.print("Student GPA: ");
-        String GPA = scanner.nextLine();
+
+        String ID = validateID(scanner);
+        String Name = validateName(scanner);
+        String Age = validateAge(scanner);
+        String Gender = validateGender(scanner);
+        String Department = validateDepartment(scanner);
+        String GPA = validateGPA(scanner);
         
         Student student = new Student(ID, Name, Age, Gender, Department, GPA);
         insertRecord(student);
+        SortbyID();
+        saveToFile();
         System.out.println("Student added successfully.");
-        
+        scanner.close();
     }
     
     
@@ -70,7 +70,7 @@ public class StudentDatabase{
 
     public boolean contains(String key){
         for (Student student : records) {
-            if (student.getStudentID().equals(key)) {
+            if (student.getStudentID().equals(key) || student.getFullName().equals(key)) {
                 return true;
             }
         }
@@ -79,7 +79,7 @@ public class StudentDatabase{
 
      public Student getRecord(String key){
          for (Student student : records) {
-             if (student.getStudentID().equals(key)) {
+             if (student.getStudentID().equals(key)  || student.getFullName().equals(key)) {
                  return student;
              }
          }
@@ -118,88 +118,87 @@ public class StudentDatabase{
     public void viewStudents(){
         for (Student student : returnAllRecords()) {
             System.out.println(student.lineRepresentation());
+        }
     }
-}
+
     public void SortbyName(){
         int n = records.size();
-    for (int i = 0; i < n - 1; i++) {
-        for (int j = 0; j < n - i - 1; j++) {
-            Student s1 = records.get(j);
-            Student s2 = records.get(j + 1);
-            
-            if (s1.getFullName().compareToIgnoreCase(s2.getFullName()) > 0) {
+        for (int i = 0; i < n - 1; i++) {
+            for (int j = 0; j < n - i - 1; j++) {
+                Student s1 = records.get(j);
+                Student s2 = records.get(j + 1);
 
-                Student temp = records.get(j);
-                records.set(j, records.get(j + 1));
-                records.set(j + 1, temp);
+                String name1 = s1.getFullName().trim().toLowerCase();
+                String name2 = s2.getFullName().trim().toLowerCase();
+
+                if (name1.compareTo(name2) > 0) {
+                    Student temp = records.get(j);
+                    records.set(j, records.get(j + 1));
+                    records.set(j + 1, temp);
+                }
             }
         }
     }
-    }
-      public void SortbyID(){
+
+    public void SortbyID(){
         int n = records.size();
-    for (int i = 0; i < n - 1; i++) {
-        for (int j = 0; j < n - i - 1; j++) {
-            Student s1 = records.get(j);
-            Student s2 = records.get(j + 1);
-            
-            if (s1.getStudentID().compareToIgnoreCase(s2.getStudentID()) > 0) {
+        for (int i = 0; i < n - 1; i++) {
+            for (int j = 0; j < n - i - 1; j++) {
+                Student s1 = records.get(j);
+                Student s2 = records.get(j + 1);
 
-                Student temp = records.get(j);
-                records.set(j, records.get(j + 1));
-                records.set(j + 1, temp);
+                int id1 = Integer.parseInt(s1.getStudentID());
+                int id2 = Integer.parseInt(s2.getStudentID());
+
+                if (id1 > id2) {
+                    Student temp = records.get(j);
+                    records.set(j, records.get(j + 1));
+                    records.set(j + 1, temp);
+                }
             }
         }
-    }
     }
 
     public void UpdateStudent(){
-    Scanner scanner = new Scanner(System.in);
-    viewStudents();
-    System.out.println("Enter the ID of the Student you would like to Update: ");
-    String ID = scanner.nextLine();
-    if(!contains(ID)){
-        System.out.println("This Student doesn't exist");
-        return;
-    }
-    int x;
-    Student updatedStudent = getRecord(ID);
-     while(true){
-            System.out.print("\t\t~~~MENU~~~\n\t1.ID\n\t2.NAME\n\t3.Age\n\t4.Gender\n\t5.Department\n\t6.GPA\n\t0.EXIT.\n"+updatedStudent.lineRepresentation()+"\n~>Enter the number of information you would like to update: ");
-            x = scanner.nextInt();
+        Scanner scanner = new Scanner(System.in);
+        viewStudents();
+        System.out.print("Enter the ID of the Student you would like to Update: ");
+        String ID = scanner.nextLine();
+        if(!contains(ID)){
+            System.out.println("This Student doesn't exist");
+            return;
+        }
+        int choice;
+        Student updatedStudent = getRecord(ID);
+        while(true){
+            System.out.print("\t\t~~~MENU~~~\n\t1.ID\n\t2.NAME\n\t3.Age\n\t4.Gender\n\t5.Department\n\t6.GPA\n\t0.Save & Exit.\n"+updatedStudent.lineRepresentation()+"\n~>Choose from 0->6: ");
+            choice = scanner.nextInt();
             scanner.nextLine();
-            
-            switch(x){
+
+            switch(choice){
                 case 1:
-                System.out.println("Enter the new ID:");
-                String newID = scanner.nextLine();
-                updatedStudent.setStudentID(newID);
+                    String newID = validateID(scanner);
+                    updatedStudent.setStudentID(newID);
                     break;
                 case 2:
-                System.out.println("Enter the new Name: ");
-                String newName = scanner.nextLine();
-                updatedStudent.setFullName(newName);
-                   
+                    String newName = validateName(scanner);
+                    updatedStudent.setFullName(newName);
                     break;
                 case 3:
-                System.out.println("Enter the new Age: ");
-                String newAge = scanner.nextLine();
-                updatedStudent.setAge(newAge);
+                    String newAge = validateAge(scanner);
+                    updatedStudent.setAge(newAge);
                     break;
                 case 4:
-                System.out.println("Enter the new Gender: ");
-                String newGender = scanner.nextLine();
-                updatedStudent.setGender(newGender);
+                    String newGender = validateGender(scanner);
+                    updatedStudent.setGender(newGender);
                     break;
                 case 5:
-                System.out.println("Enter the new Departement: ");
-                String newDep = scanner.nextLine();
-                updatedStudent.setDepartment(newDep);
+                    String newDep = validateDepartment(scanner);
+                    updatedStudent.setDepartment(newDep);
                     break;
                 case 6:
-                System.out.println("Enter the new GPA: ");
-                String newGPA = scanner.nextLine();
-                updatedStudent.setGPA(newGPA);
+                    String newGPA = validateGPA(scanner);
+                    updatedStudent.setGPA(newGPA);
                     break;
                 case 0:
                     System.out.println("Saving...");
@@ -218,7 +217,7 @@ public class StudentDatabase{
 
     public void deleteStudent(){
         Scanner scanner = new Scanner(System.in);
-        System.out.println("Enter the ID of the Student you want to delete: ");
+        System.out.print("Enter the ID of the Student you want to delete: ");
         String deleteID = scanner.nextLine();
         if(!contains(deleteID)){
             System.out.println("This Student doesn't exist");
@@ -229,6 +228,7 @@ public class StudentDatabase{
         if (Action.equalsIgnoreCase("y")){
             deleteRecord(deleteID);
             System.out.println("Deleted Succefully!");
+            SortbyID();
             saveToFile();
             return;
         }
@@ -236,29 +236,114 @@ public class StudentDatabase{
         return;
     }
     
-    public void SearchByID(){
+    public void SearchStudent(){
         Scanner scanner = new Scanner(System.in);
-        System.out.println("Enter the ID of the Student to search for: ");
-        String ID = scanner.nextLine();
-        if(!contains(ID)){
+        System.out.print("Enter the ID or Name of the Student to search for: ");
+        String data = scanner.nextLine();
+        if(!contains(data)){
             System.out.println("This Student doesn't Exist");
             return;
         }
-        System.out.println(getRecord(ID).lineRepresentation());
-        
+        System.out.println(getRecord(data).lineRepresentation());
     }
+
+
+    private String validateID(Scanner scanner) {
+        String id;
+        while (true) {
+            System.out.print("Student ID: ");
+            id = scanner.nextLine().trim();
+            if (id.matches("[A-Za-z0-9]+")) {
+                if (!contains(id)) {
+                    return id;
+                } else {
+                    System.out.println("This ID already exists.");
+                }
+            } else {
+                System.out.println("Invalid ID. Only letters and numbers are allowed.");
+            }
+        }
+    }
+
+    private String validateName(Scanner scanner) {
+        String name;
+        while (true) {
+            System.out.print("Student Name: ");
+            name = scanner.nextLine().trim();
+            if (name.matches("[A-Za-z ]+")) {
+                return name;
+            } else {
+                System.out.println("Invalid name. Use only letters and spaces.");
+            }
+        }
+    }
+
+    private String validateAge(Scanner scanner) {
+        String age;
+        while (true) {
+            System.out.print("Student Age: ");
+            age = scanner.nextLine().trim();
+            if (age.matches("\\d{1,2}")) {
+                int num = Integer.parseInt(age);
+                if (num >= 10 && num <= 100) {
+                    return age;
+                }
+            }
+            System.out.println("Invalid age. Enter a number between 10 and 100.");
+        }
+    }
+
+    private String validateGender(Scanner scanner) {
+        String gender;
+        while (true) {
+            System.out.print("Student Gender (M/F): ");
+            gender = scanner.nextLine().trim();
+            if (gender.equalsIgnoreCase("M") || gender.equalsIgnoreCase("F") ||
+                    gender.equalsIgnoreCase("Male") || gender.equalsIgnoreCase("Female")) {
+                return gender.substring(0, 1).toUpperCase() + gender.substring(1).toLowerCase();
+            } else {
+                System.out.println("Invalid gender. Enter M/F or Male/Female.");
+            }
+        }
+    }
+
+    private String validateDepartment(Scanner scanner) {
+        String department;
+        while (true) {
+            System.out.print("Student Department: ");
+            department = scanner.nextLine().trim();
+            if (department.matches("[A-Za-z ]+")) {
+                return department;
+            } else {
+                System.out.println("Invalid department. Use letters and spaces only.");
+            }
+        }
+    }
+
+    private String validateGPA(Scanner scanner) {
+        String gpa;
+        while (true) {
+            System.out.print("Student GPA: ");
+            gpa = scanner.nextLine().trim();
+            double num = Double.parseDouble(gpa);
+            if (num >= 0.0 && num <= 4.0) {
+                return String.format("%.2f", num);
+            }
+            System.out.println("Invalid GPA. Enter a number between 0.0 and 4.0.");
+        }
+    }
+
 
     public static void main(String[] args) {
         StudentDatabase db = new StudentDatabase();
-        db.filename = "students.txt";
+        db.filename = "src/Model/students.txt";
         db.records = new ArrayList<>();
         db.readFromFile();
-        db.AddStudent();
-        db.saveToFile();
-        db.UpdateStudent();
-        db.deleteStudent();
-        
+        //db.AddStudent();
+        //db.UpdateStudent();
+        //db.deleteStudent();
+        db.viewStudents();
+        //db.SearchStudent();
         }
-        
     }
 

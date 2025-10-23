@@ -1,3 +1,4 @@
+package Model;
 public class Student extends Person{
     private String StudentID;
     private String Department;

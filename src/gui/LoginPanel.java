@@ -23,19 +23,25 @@ public class LoginPanel extends JFrame {
         setLocationRelativeTo(null);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setResizable(true);
+        setVisible(true);
         LoginBtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 String username = usernameTextField.getText();
                 String password = new String(passwordField.getPassword());
                 if(username.isEmpty() || password.isEmpty()){
+                    //Incomplete Credentials
                     JOptionPane.showMessageDialog(Container, "Please Enter Username and Password!");
                     return;
                 }
                 if(isLoginValid(username, password)){
-                    JOptionPane.showMessageDialog(Container, "Login Successful!");
+                    //Successful Login
+                    setVisible(false);
+                    Dashboard dashboard = new Dashboard();
+                    dashboard.setVisible(true);
                 }
                 else {
+                    // Failed Login
                     JOptionPane.showMessageDialog(Container, "Login Credentials are Incorrect!\nPlease Try Again!!");
                 }
             }
