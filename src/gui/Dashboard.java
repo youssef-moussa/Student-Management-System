@@ -36,7 +36,7 @@ public class Dashboard extends JFrame{
             @Override
             public void actionPerformed(ActionEvent e) {
                 setVisible(false);
-                //Create object from view Panel and set it to true
+                new ViewPanel(db, Dashboard.this).setVisible(true);
             }
         });
         searchOrUpdateButton.addActionListener(new ActionListener() {
