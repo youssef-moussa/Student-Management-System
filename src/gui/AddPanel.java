@@ -16,19 +16,15 @@ public class AddPanel extends JFrame {
     private JTextField gpaField;
     private JPanel Container;
     private JButton saveButton;
-    private StudentDatabase db;
-    private Dashboard dashboard;
 
     public AddPanel(StudentDatabase db, Dashboard dashboard) {
-        this.db = db;
-        this.dashboard = dashboard;
 
         // Window settings
         setTitle("Add Student");
         setContentPane(Container);
         setSize(400, 400);
         setLocationRelativeTo(null);
-        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        setDefaultCloseOperation(EXIT_ON_CLOSE);
         setVisible(true);
 
         // Save button action

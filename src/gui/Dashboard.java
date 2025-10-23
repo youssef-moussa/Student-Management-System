@@ -14,11 +14,7 @@ public class Dashboard extends JFrame{
     private JButton deleteStudentButton;
     private JPanel Container;
 
-    private StudentDatabase db;
-
     public Dashboard(StudentDatabase db){
-
-        this.db = db;
 
         setContentPane(Container);
         setTitle("Student Management System");

@@ -13,13 +13,9 @@ public class LoginPanel extends JFrame {
     private JPasswordField passwordField;
     private JLabel password;
     private JButton LoginBtn;
-    private JLabel title;
-
-    private StudentDatabase db;
 
 
     public LoginPanel(StudentDatabase db) {
-        this.db = db;
         setContentPane(Container);
         setTitle("Login");
         setMinimumSize(new java.awt.Dimension(300, 200));
