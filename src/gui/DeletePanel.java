@@ -3,7 +3,6 @@ package gui;
 import Model.StudentDatabase;
 
 import javax.swing.*;
-import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -11,6 +10,7 @@ public class DeletePanel extends JFrame {
     private JPanel Container;
     private JTextField idDeleteField;
     private JButton confirmDeleteButton;
+    private JButton goBackButton;
     private StudentDatabase db;
     private Dashboard dashboard;
 
@@ -28,12 +28,17 @@ public class DeletePanel extends JFrame {
         confirmDeleteButton.addActionListener(e -> {
             String id = idDeleteField.getText().trim();
 
+
             if (id.isEmpty()) {
                 JOptionPane.showMessageDialog(Container, "Please enter a Student ID!");
                 return;
             }
 
-            if (!db.contains(id)) {
+            if(!db.validateID(id)){
+                JOptionPane.showMessageDialog(Container, "Invalid ID!");
+                return;
+            }
+            if (!db.containsID(id)) {
                 JOptionPane.showMessageDialog(Container, "Student ID not found!");
                 return;
             }
@@ -49,6 +54,21 @@ public class DeletePanel extends JFrame {
             }
         });
 
+        goBackButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                int confirm = JOptionPane.showConfirmDialog(Container,
+                        "Are you sure you want to go back?", "Confirm Back",
+                        JOptionPane.YES_NO_OPTION);
+                if(confirm == JOptionPane.YES_OPTION)
+                    setVisible(false);
+                else
+                    return;
+                dashboard.setVisible(true);
+                dispose();
+                System.gc();
+            }
+        });
     }
 }
 

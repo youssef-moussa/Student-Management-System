@@ -40,17 +40,20 @@ public class ViewPanel extends JFrame {
         JScrollPane scrollPane = new JScrollPane(studentTable);
 
         // Back button
-        backButton = new JButton("Back to Dashboard");
+        backButton = new JButton("Go Back");
+
+        // Bottom panel with FlowLayout to size button to text
+        JPanel bottomPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 0, 10));
+        bottomPanel.add(backButton);
 
         // Layout
         setLayout(new BorderLayout());
         add(topPanel, BorderLayout.NORTH);
         add(scrollPane, BorderLayout.CENTER);
-        add(backButton, BorderLayout.SOUTH);
+        add(bottomPanel, BorderLayout.SOUTH);
 
         // Load initial student data
         loadTableData(db.returnAllRecords());
-
 
         sortByIDButton.addActionListener(e -> {
             db.SortByID();

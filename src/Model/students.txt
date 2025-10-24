@@ -1,11 +1,7 @@
-9300,Youssef Mohamed,20,dd,CCE,4
-9311,Habiba Mohamed,24,Female,MRE,2.5
-9340,Abd ElRahman ElSharnouby,20,Male,CCE,3.3
-9347,Sharnouby,20,Female,CCE,4
-9384,Youssef Mohamed,20,Male,CCE,3.0
-9404,Adham Mohamed,20,Male,EME,3.2
+9340,Abd ElRahman ElSharnouby,19,Male,CCE,3.3
+9380,Ahmed Mohamed,21,Male,CCE,3.0
+9384,Youssef Mohamed,20,Male,CCE,3.77
+9404,Adham Mohamed,20,Male,EME,3.0
 9600,Hassan Cappucino,20,Male,MRE,3.4
-9623,Hanya Ashraf,20,Female,CCE,3.23
 9653,Hoda Hany,20,Female,CCE,3.5
-28374,Hoda,20,Male,CCE,3.2
-47382,fdsfd,32,male,CCE,3.2
+

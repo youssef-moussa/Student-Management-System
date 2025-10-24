@@ -62,15 +62,23 @@ public class StudentDatabase {
         return records;
     }
 
-    public boolean contains(String key){
+    public boolean containsID(String id){
         for (Student student : records) {
-            if (student.getStudentID().equals(key) || student.getFullName().equals(key)) {
+            if (student.getStudentID().equals(id)) {
                 return true;
             }
         }
         return false;
     }
 
+    public boolean containsName(String name){
+        for (Student student : records) {
+            if (student.getFullName().equalsIgnoreCase(name)) {
+                return true;
+            }
+        }
+        return false;
+    }
      public Student getRecord(String key){
          for (Student student : records) {
              if (student.getStudentID().equals(key)  || student.getFullName().equals(key)) {
@@ -81,7 +89,7 @@ public class StudentDatabase {
      }
 
     public void insertRecord(Student record){
-        if (record != null && !contains(record.getStudentID())) {
+        if (record != null && !containsID(record.getStudentID())) {
             records.add(record);
         } 
     }
@@ -154,33 +162,23 @@ public class StudentDatabase {
     }
 
     public void UpdateStudent(Student student) {
-        if(!contains(student.getStudentID())){
-            return;
+        for (int i = 0; i < records.size(); i++) {
+            if (records.get(i).getStudentID().equals(student.getStudentID())) {
+                records.set(i, student);
+                SortByID();
+                saveToFile();
+                return;
+            }
         }
-        deleteRecord(student.getStudentID());
-        insertRecord(student);
-        SortByID();
-        saveToFile();
     }
 
     public void deleteStudent(String id){
-        if(!contains(id)){
+        if(!containsID(id)){
             return;
         }
             deleteRecord(id);
             SortByID();
             saveToFile();
-    }
-    
-    public void SearchStudent(){
-        Scanner scanner = new Scanner(System.in);
-        System.out.print("Enter the ID or Name of the Student to search for: ");
-        String data = scanner.nextLine();
-        if(!contains(data)){
-            System.out.println("This Student doesn't Exist");
-            return;
-        }
-        System.out.println(getRecord(data).lineRepresentation());
     }
 
 
@@ -206,7 +204,19 @@ public class StudentDatabase {
     }
 
     public boolean validateDepartment(String department) {
-        return department.matches("[A-Za-z ]+") && department.length() == 3;
+        if (department == null || department.trim().isEmpty()) {
+            return false;
+        }
+        switch (department.trim().toUpperCase()) {
+            case "CCE":
+            case "MRE":
+            case "BME":
+            case "EME":
+            case "CAE":
+                return true;
+            default:
+                return false;
+        }
     }
 
     public boolean validateGPA(String gpa) {

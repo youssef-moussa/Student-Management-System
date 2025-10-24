@@ -6,7 +6,7 @@
       <xy x="0" y="0" width="400" height="200"/>
     </constraints>
     <properties>
-      <background color="-2032385"/>
+      <background color="-1550"/>
     </properties>
     <border type="none"/>
     <children>
@@ -15,10 +15,11 @@
           <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
+          <background color="-1550"/>
           <font style="1"/>
-          <foreground color="-12756251"/>
+          <foreground color="-16580351"/>
           <labelFor value="52da7"/>
-          <opaque value="false"/>
+          <opaque value="true"/>
           <text value="Username:"/>
         </properties>
       </component>
@@ -28,7 +29,7 @@
         </constraints>
         <properties>
           <font size="20" style="1"/>
-          <foreground color="-12493339"/>
+          <foreground color="-16580351"/>
           <horizontalAlignment value="0"/>
           <horizontalTextPosition value="0"/>
           <text value="Student Management System"/>
@@ -39,10 +40,10 @@
           <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
-          <background color="-12756251"/>
+          <background color="-16580351"/>
           <enabled value="true"/>
           <font style="1"/>
-          <foreground color="-12493339"/>
+          <foreground color="-16580351"/>
           <text value="Password:"/>
         </properties>
       </component>
@@ -63,7 +64,7 @@
           <grid row="2" column="1" row-span="1" col-span="2" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
-          <background color="-2228993"/>
+          <background color="-1550"/>
         </properties>
       </component>
       <component id="52da7" class="javax.swing.JTextField" binding="usernameTextField" custom-create="true" default-binding="true">
@@ -71,7 +72,7 @@
           <grid row="1" column="1" row-span="1" col-span="2" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
-          <background color="-2228993"/>
+          <background color="-1550"/>
           <text value=""/>
         </properties>
       </component>

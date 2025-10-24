@@ -13,6 +13,7 @@ public class Dashboard extends JFrame{
     private JButton searchOrUpdateButton;
     private JButton deleteStudentButton;
     private JPanel Container;
+    private JButton logOutButton;
 
     public Dashboard(StudentDatabase db){
 
@@ -54,5 +55,15 @@ public class Dashboard extends JFrame{
             }
         });
 
+        logOutButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                setVisible(false);
+                JOptionPane.showMessageDialog(Container, "You have successfully logged out!");
+                new LoginPanel(db).setVisible(true);
+                dispose();
+                System.gc();
+            }
+        });
     }
 }

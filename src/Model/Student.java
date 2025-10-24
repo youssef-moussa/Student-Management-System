@@ -1,5 +1,5 @@
 package Model;
-public class Student extends Person{
+public class Student extends Person {
     private String StudentID;
     private String Department;
     private String GPA;
@@ -17,9 +17,6 @@ public class Student extends Person{
     public String lineRepresentation(){
         return this.StudentID+","+this.getFullName()+","+this.getAge()+","+this.getGender()+","+this.Department+","+this.GPA;     
     }
-    
-    
-    
     
     public String getStudentID() {
         return StudentID;
@@ -41,7 +38,7 @@ public class Student extends Person{
         return GPA;
     }
 
-    public void setGPA(String gPA) {
-        GPA = gPA;
+    public void setGPA(String GPA) {
+        this.GPA = GPA;
     }  
 }

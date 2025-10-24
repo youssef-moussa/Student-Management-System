@@ -4,7 +4,8 @@ import Model.StudentDatabase;
 import Model.Student;
 
 import javax.swing.*;
-
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 
 public class AddPanel extends JFrame {
@@ -18,6 +19,7 @@ public class AddPanel extends JFrame {
     private JRadioButton MaleBtn;
     private JRadioButton FemaleBtn;
     private JComboBox DepartmentList;
+    private JButton goBackButton;
 
     public AddPanel(StudentDatabase db, Dashboard dashboard) {
 
@@ -37,9 +39,6 @@ public class AddPanel extends JFrame {
         DepartmentList.addItem("BME");
         DepartmentList.addItem("EME");
         DepartmentList.addItem("CAE");
-
-// Optional: set default selection
-        DepartmentList.setSelectedItem("Engineering");
 
 
 
@@ -62,7 +61,7 @@ public class AddPanel extends JFrame {
                 JOptionPane.showMessageDialog(Container, "Invalid ID!");
                 return;
             }
-            if (db.contains(id)) {
+            if (db.containsID(id)) {
                 JOptionPane.showMessageDialog(Container, "A student with this ID already exists!");
                 return;
             }
@@ -104,5 +103,20 @@ public class AddPanel extends JFrame {
             gpaField.setText("");
         });
 
+        goBackButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                int confirm = JOptionPane.showConfirmDialog(Container,
+                        "Are you sure you want to go back?", "Confirm Back",
+                        JOptionPane.YES_NO_OPTION);
+                if(confirm == JOptionPane.YES_OPTION)
+                    setVisible(false);
+                else
+                    return;
+                dashboard.setVisible(true);
+                dispose();
+                System.gc();
+            }
+        });
     }
 }
