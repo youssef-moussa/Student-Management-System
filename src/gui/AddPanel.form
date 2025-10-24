@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <form xmlns="http://www.intellij.com/uidesigner/form/" version="1" bind-to-class="gui.AddPanel">
-  <grid id="27dc6" binding="Container" layout-manager="GridLayoutManager" row-count="14" column-count="2" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+  <grid id="27dc6" binding="Container" layout-manager="GridLayoutManager" row-count="14" column-count="4" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
     <margin top="0" left="0" bottom="0" right="0"/>
     <constraints>
-      <xy x="20" y="73" width="500" height="351"/>
+      <xy x="20" y="73" width="500" height="378"/>
     </constraints>
     <properties>
       <background color="-2032385"/>
@@ -44,7 +44,7 @@
       </component>
       <component id="af8d2" class="javax.swing.JLabel">
         <constraints>
-          <grid row="0" column="0" row-span="1" col-span="2" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+          <grid row="0" column="0" row-span="1" col-span="4" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
           <font size="20" style="1"/>
@@ -54,7 +54,7 @@
       </component>
       <component id="6add2" class="javax.swing.JTextField" binding="gpaField">
         <constraints>
-          <grid row="12" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
+          <grid row="12" column="1" row-span="1" col-span="3" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
             <preferred-size width="150" height="-1"/>
           </grid>
         </constraints>
@@ -75,7 +75,7 @@
       </component>
       <component id="71b53" class="javax.swing.JTextField" binding="idField">
         <constraints>
-          <grid row="1" column="1" row-span="3" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
+          <grid row="1" column="1" row-span="3" col-span="3" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
             <preferred-size width="150" height="-1"/>
           </grid>
         </constraints>
@@ -96,7 +96,7 @@
       </component>
       <component id="58ce1" class="javax.swing.JTextField" binding="nameField">
         <constraints>
-          <grid row="4" column="1" row-span="2" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
+          <grid row="4" column="1" row-span="2" col-span="3" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
             <preferred-size width="150" height="-1"/>
           </grid>
         </constraints>
@@ -116,28 +116,7 @@
       </component>
       <component id="91bd3" class="javax.swing.JTextField" binding="ageField">
         <constraints>
-          <grid row="6" column="1" row-span="2" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
-            <preferred-size width="150" height="-1"/>
-          </grid>
-        </constraints>
-        <properties>
-          <background color="-2228993"/>
-        </properties>
-      </component>
-      <component id="606b" class="javax.swing.JTextField" binding="genderField">
-        <constraints>
-          <grid row="8" column="1" row-span="2" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
-            <preferred-size width="150" height="-1"/>
-          </grid>
-        </constraints>
-        <properties>
-          <background color="-2228993"/>
-          <text value=""/>
-        </properties>
-      </component>
-      <component id="2f32f" class="javax.swing.JTextField" binding="departField">
-        <constraints>
-          <grid row="10" column="1" row-span="2" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
+          <grid row="6" column="1" row-span="2" col-span="3" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
             <preferred-size width="150" height="-1"/>
           </grid>
         </constraints>
@@ -147,7 +126,7 @@
       </component>
       <component id="65e00" class="javax.swing.JButton" binding="saveButton" default-binding="true">
         <constraints>
-          <grid row="13" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+          <grid row="13" column="1" row-span="1" col-span="3" vsize-policy="0" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
           <background color="-2032385"/>
@@ -156,6 +135,32 @@
           <foreground color="-15725811"/>
           <horizontalTextPosition value="0"/>
           <text value="Save"/>
+        </properties>
+      </component>
+      <component id="e3dee" class="javax.swing.JRadioButton" binding="FemaleBtn">
+        <constraints>
+          <grid row="8" column="2" row-span="2" col-span="2" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <background color="-2228993"/>
+          <text value="Female"/>
+        </properties>
+      </component>
+      <component id="e83" class="javax.swing.JRadioButton" binding="MaleBtn">
+        <constraints>
+          <grid row="8" column="1" row-span="2" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <background color="-2228993"/>
+          <text value="Male"/>
+        </properties>
+      </component>
+      <component id="691bf" class="javax.swing.JComboBox" binding="DepartmentList">
+        <constraints>
+          <grid row="10" column="1" row-span="2" col-span="2" vsize-policy="0" hsize-policy="2" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <background color="-2228993"/>
         </properties>
       </component>
     </children>

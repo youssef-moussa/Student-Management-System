@@ -153,61 +153,15 @@ public class StudentDatabase {
         }
     }
 
-//    public void UpdateStudent(){
-//        Scanner scanner = new Scanner(System.in);
-//        viewStudents();
-//        System.out.print("Enter the ID of the Student you would like to Update: ");
-//        String ID = scanner.nextLine();
-//        if(!contains(ID)){
-//            System.out.println("This Student doesn't exist");
-//            return;
-//        }
-//        int choice;
-//        Student updatedStudent = getRecord(ID);
-//        while(true){
-//            System.out.print("\t\t~~~MENU~~~\n\t1.ID\n\t2.NAME\n\t3.Age\n\t4.Gender\n\t5.Department\n\t6.GPA\n\t0.Save & Exit.\n"+updatedStudent.lineRepresentation()+"\n~>Choose from 0->6: ");
-//            choice = scanner.nextInt();
-//            scanner.nextLine();
-//
-//            switch(choice){
-//                case 1:
-//                    String newID = validateID(scanner);
-//                    updatedStudent.setStudentID(newID);
-//                    break;
-//                case 2:
-//                    String newName = validateName(scanner);
-//                    updatedStudent.setFullName(newName);
-//                    break;
-//                case 3:
-//                    String newAge = validateAge(scanner);
-//                    updatedStudent.setAge(newAge);
-//                    break;
-//                case 4:
-//                    String newGender = validateGender(scanner);
-//                    updatedStudent.setGender(newGender);
-//                    break;
-//                case 5:
-//                    String newDep = validateDepartment(scanner);
-//                    updatedStudent.setDepartment(newDep);
-//                    break;
-//                case 6:
-//                    String newGPA = validateGPA(scanner);
-//                    updatedStudent.setGPA(newGPA);
-//                    break;
-//                case 0:
-//                    System.out.println("Saving...");
-//                    deleteRecord(ID);
-//                    insertRecord(updatedStudent);
-//                    SortByID();
-//                    saveToFile();
-//                    System.out.println("Saved Successfully");
-//                    return;
-//                default:
-//                    System.out.println("***Invalid Choice (0->6)***\n");
-//                    break;
-//            }
-//        }
-//    }
+    public void UpdateStudent(Student student) {
+        if(!contains(student.getStudentID())){
+            return;
+        }
+        deleteRecord(student.getStudentID());
+        insertRecord(student);
+        SortByID();
+        saveToFile();
+    }
 
     public void deleteStudent(String id){
         if(!contains(id)){
@@ -230,18 +184,20 @@ public class StudentDatabase {
     }
 
 
-    private boolean validateID(String id) {
-        if (id.matches("[A-Za-z0-9]+")) {
-            return !contains(id);
+    public boolean validateID(String id) {
+        try {
+            int num = Integer.parseInt(id);
+            return num >= 1000 && num <= 9999;
+        } catch (NumberFormatException e) {
+            return false;
         }
-        return false;
     }
 
-    private boolean validateName(String name) {
+    public boolean validateName(String name) {
         return name.matches("[A-Za-z ]+");
     }
 
-    private boolean validateAge(String age) {
+    public boolean validateAge(String age) {
             if (age.matches("\\d{1,2}")) {
                 int num = Integer.parseInt(age);
                 return num >= 10 && num <= 100;
@@ -249,13 +205,39 @@ public class StudentDatabase {
             return false;
     }
 
-    private boolean validateDepartment(String department) {
+    public boolean validateDepartment(String department) {
         return department.matches("[A-Za-z ]+") && department.length() == 3;
     }
 
-    private boolean validateGPA(String gpa) {
-        double num = Double.parseDouble(gpa);
-        return num >= 0.0 && num <= 4.0;
+    public boolean validateGPA(String gpa) {
+        if (gpa == null || gpa.trim().isEmpty()) {
+            return false;
+        }
+        try {
+            double num = Double.parseDouble(gpa.trim());
+            return num >= 0.0 && num <= 4.0;
+        } catch (NumberFormatException e) {
+            return false;
+        }
+    }
+
+    public Student searchByID(int id) {
+        for (Student student : records) {
+            if (student.getStudentID().equals(String.valueOf(id))) {
+                return student;
+            }
+        }
+        return null;
+    }
+
+    public ArrayList<Student> searchByName(String query) {
+        ArrayList<Student> results = new ArrayList<>();
+        for (Student student : records) {
+            if (student.getFullName().toLowerCase().contains(query.toLowerCase())) {
+                results.add(student);
+            }
+        }
+        return results;
     }
 }
 

@@ -43,7 +43,7 @@ public class Dashboard extends JFrame{
             @Override
             public void actionPerformed(ActionEvent e) {
                 setVisible(false);
-                //Create object from Search & Update Panel and set it to true
+                new SearchUpdatePanel(db, Dashboard.this).setVisible(true);
             }
         });
         deleteStudentButton.addActionListener(new ActionListener() {
