@@ -91,28 +91,14 @@ public class AddPanel extends JFrame {
 
             JOptionPane.showMessageDialog(Container, "Student added successfully!");
 
-            // Clear fields
-            idField.setText("");
-            nameField.setText("");
-            ageField.setText("");
-            if (MaleBtn.isSelected())
-                MaleBtn.setSelected(false);
-            else
-                FemaleBtn.setSelected(false);
-            DepartmentList.setSelectedItem("CCE");
-            gpaField.setText("");
+            setVisible(false);
+            dashboard.setVisible(true);
         });
 
         goBackButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                int confirm = JOptionPane.showConfirmDialog(Container,
-                        "Are you sure you want to go back?", "Confirm Back",
-                        JOptionPane.YES_NO_OPTION);
-                if(confirm == JOptionPane.YES_OPTION)
-                    setVisible(false);
-                else
-                    return;
+                setVisible(false);
                 dashboard.setVisible(true);
                 dispose();
                 System.gc();

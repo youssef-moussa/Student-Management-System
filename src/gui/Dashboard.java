@@ -14,13 +14,15 @@ public class Dashboard extends JFrame{
     private JButton deleteStudentButton;
     private JPanel Container;
     private JButton logOutButton;
+    private JButton exitButton;
 
-    public Dashboard(StudentDatabase db){
+    public Dashboard(StudentDatabase db, String name){
 
         setContentPane(Container);
         setTitle("Student Management System");
         setMinimumSize(new java.awt.Dimension(300, 200));
         pack();
+        welcomeMessage.setText("Welcome, " + name + "!");
         setLocationRelativeTo(null);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setResizable(true);
@@ -63,6 +65,20 @@ public class Dashboard extends JFrame{
                 new LoginPanel(db).setVisible(true);
                 dispose();
                 System.gc();
+            }
+        });
+
+        exitButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                int confirm = JOptionPane.showConfirmDialog(Container,
+                        "Are you sure you want to exit?", "Exit Confirmation",
+                        JOptionPane.YES_NO_OPTION);
+
+                if (confirm == JOptionPane.YES_OPTION) {
+                    setVisible(false);
+                    System.exit(0);
+                }
             }
         });
     }

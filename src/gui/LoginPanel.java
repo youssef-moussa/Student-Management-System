@@ -37,7 +37,7 @@ public class LoginPanel extends JFrame {
                 if(isLoginValid(username, password)){
                     //Successful Login
                     setVisible(false);
-                    new Dashboard(db);
+                    new Dashboard(db, username);
 
                 }
                 else {
