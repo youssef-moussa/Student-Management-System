@@ -63,15 +63,8 @@ public class LoginPanel extends JFrame {
         }
     }
 
-
     private void createUIComponents() {
         usernameTextField = new JTextField();
         usernameTextField.setColumns(20);
     }
-
-    public static void main(String[] args) {
-        StudentDatabase db = new StudentDatabase();
-        new LoginPanel(db).setVisible(true);
-    }
-
 }

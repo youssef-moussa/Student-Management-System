@@ -41,7 +41,6 @@ public class AddPanel extends JFrame {
         DepartmentList.addItem("CAE");
 
 
-
         // Save button action
         saveButton.addActionListener(e -> {
 
@@ -81,7 +80,6 @@ public class AddPanel extends JFrame {
                 JOptionPane.showMessageDialog(Container, "Invalid GPA!");
                 return;
             }
-
 
             // Create and add student
             db.AddStudent(id,name,age,gender,dept,gpa);

@@ -199,9 +199,9 @@ public class StudentDatabase {
         if(!containsID(id)){
             return;
         }
-            deleteRecord(id);
-            SortByID();
-            saveToFile();
+        deleteRecord(id);
+        SortByID();
+        saveToFile();
     }
 
 
