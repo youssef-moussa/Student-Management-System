@@ -13,7 +13,7 @@ public class Student extends Person {
         this.Department = department;
         this.GPA = GPA;
     }
-    
+
     public String lineRepresentation(){
         return this.StudentID+","+this.getFullName()+","+this.getAge()+","+this.getGender()+","+this.Department+","+this.GPA;     
     }
@@ -38,7 +38,7 @@ public class Student extends Person {
         return GPA;
     }
 
-    public void setGPA(String GPA) {
-        this.GPA = GPA;
-    }  
+    public void setGPA(String GPA) {this.GPA = GPA;}
 }
+
+

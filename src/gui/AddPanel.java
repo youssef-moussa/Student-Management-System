@@ -50,13 +50,13 @@ public class AddPanel extends JFrame {
             String age = ageField.getText().trim();
             String gender = MaleBtn.isSelected() ? "Male" : "Female";
             String dept = (String) DepartmentList.getSelectedItem();
-            String gpa = gpaField.getText().trim();
+            String gpa = String.format("%.2f", Double.parseDouble(gpaField.getText().trim()));
 
-            if (id.isEmpty() || name.isEmpty() || age.isEmpty() || gender.isEmpty() || dept.isEmpty() || gpa.isEmpty()) {
-                JOptionPane.showMessageDialog(Container, "Please fill in all fields!");
+            if (name.isEmpty() || age.isEmpty() || gender.isEmpty() || dept.isEmpty() || gpa.isEmpty()) {
+                JOptionPane.showMessageDialog(Container, "Please fill in Required fields!");
                 return;
             }
-
+            if(!id.isEmpty()){
             if(!db.validateID(id)){
                 JOptionPane.showMessageDialog(Container, "Invalid ID!");
                 return;
@@ -64,7 +64,7 @@ public class AddPanel extends JFrame {
             if (db.containsID(id)) {
                 JOptionPane.showMessageDialog(Container, "A student with this ID already exists!");
                 return;
-            }
+            }}
 
             if(!db.validateName(name)){
                 JOptionPane.showMessageDialog(Container, "Invalid name!");
@@ -84,10 +84,7 @@ public class AddPanel extends JFrame {
 
 
             // Create and add student
-            Student s = new Student(id, name, age, gender, dept, gpa);
-            db.insertRecord(s);
-            db.SortByID();
-            db.saveToFile();
+            db.AddStudent(id,name,age,gender,dept,gpa);
 
             JOptionPane.showMessageDialog(Container, "Student added successfully!");
 

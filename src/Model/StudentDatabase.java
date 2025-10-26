@@ -8,7 +8,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
-import java.util.Scanner;
+import java.util.Random;
 
 
 public class StudentDatabase {
@@ -17,10 +17,32 @@ public class StudentDatabase {
 
 
     public void AddStudent(String ID, String Name, String Age,String Gender, String Department, String GPA){
-        Student student = new Student(ID, Name, Age, Gender, Department, GPA);
+        String finalID = ID;
+        if (ID == null || ID.isEmpty()) {
+            finalID = RandomID();
+        }
+
+        Student student = new Student(finalID, Name, Age, Gender, Department, GPA);
         insertRecord(student);
         SortByID();
         saveToFile();
+    }
+
+    private String RandomID() {
+        Random random = new Random();
+        String newID;
+        int attempts = 0;
+
+        do {
+            int number = 9000 + random.nextInt(1000);
+            newID = String.valueOf(number);
+            attempts++;
+
+            if (attempts > 100) {
+                throw new RuntimeException("Could not generate unique Student ID");
+            }
+        } while (containsID(newID));
+        return newID;
     }
     
     public StudentDatabase(){
@@ -45,6 +67,7 @@ public class StudentDatabase {
             System.out.println("Error reading file: " + e.getMessage());
         }
     }
+
 
     public Student createRecordFrom(String line) {
         try {
