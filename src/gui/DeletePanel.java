@@ -79,6 +79,11 @@ public class DeletePanel extends JFrame {
         actionColumn.setCellRenderer(new ButtonRenderer());
         actionColumn.setCellEditor(new ButtonEditor(new JCheckBox(), db, this));
 
+        actionColumn.setMinWidth(45);
+        actionColumn.setMaxWidth(45);
+        actionColumn.setPreferredWidth(45);
+
+
         JScrollPane scrollPane = new JScrollPane(studentTable);
 
         // Bottom Panel for Back Button
@@ -174,7 +179,10 @@ public class DeletePanel extends JFrame {
         @Override
         public Component getTableCellRendererComponent(JTable table, Object value,
                                                        boolean isSelected, boolean hasFocus, int row, int column) {
-            setText((value == null) ? "Delete" : value.toString());
+            setForeground(Color.RED);
+            setFont(new Font("Arial", Font.BOLD, 14));
+            setText("X");
+
             return this;
         }
     }
@@ -206,8 +214,11 @@ public class DeletePanel extends JFrame {
         public Component getTableCellEditorComponent(JTable table, Object value,
                                                      boolean isSelected, int row, int column) {
             this.currentTable = table; // Store the table reference
-            label = (value == null) ? "Delete" : value.toString();
-            button.setText(label);
+
+            button.setForeground(Color.RED);
+            button.setFont(new Font("Arial", Font.BOLD, 14));
+            button.setText("X");
+
             isPushed = true;
             return button;
         }

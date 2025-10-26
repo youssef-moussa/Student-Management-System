@@ -17,7 +17,6 @@ public class Dashboard extends JFrame{
     private JButton exitButton;
 
     public Dashboard(StudentDatabase db, String name){
-
         setContentPane(Container);
         setTitle("Student Management System");
         setMinimumSize(new java.awt.Dimension(300, 200));

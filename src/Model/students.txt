@@ -1,5 +1,4 @@
-9340,Abd ElRahman ElSharnouby,19,Male,CCE,3.3
-9363,yahia,21,Female,CCE,1.02
+9340,Abd ElRahman ElSharnouby,21,Male,CCE,3.3
 9384,Youssef Mohamed,20,Male,CCE,3.77
 9404,Adham Mohamed,20,Male,EME,3.0
 9600,Hassan Cappucino,20,Male,MRE,3.4
