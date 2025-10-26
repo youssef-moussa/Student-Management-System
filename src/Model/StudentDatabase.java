@@ -94,22 +94,6 @@ public class StudentDatabase {
         return false;
     }
 
-    public boolean containsName(String name){
-        for (Student student : records) {
-            if (student.getFullName().equalsIgnoreCase(name)) {
-                return true;
-            }
-        }
-        return false;
-    }
-     public Student getRecord(String key){
-         for (Student student : records) {
-             if (student.getStudentID().equals(key)  || student.getFullName().equals(key)) {
-                 return student;
-             }
-         }
-         return null;
-     }
 
     public void insertRecord(Student record){
         if (record != null && !containsID(record.getStudentID())) {
@@ -137,12 +121,6 @@ public class StudentDatabase {
             }
         } catch (IOException e) {
             System.out.println("Error saving to file: " + e.getMessage());
-        }
-    }
-
-    public void viewStudents(){
-        for (Student student : returnAllRecords()) {
-            System.out.println(student.lineRepresentation());
         }
     }
 
@@ -242,21 +220,6 @@ public class StudentDatabase {
             return false;
     }
 
-    public boolean validateDepartment(String department) {
-        if (department == null || department.trim().isEmpty()) {
-            return false;
-        }
-        switch (department.trim().toUpperCase()) {
-            case "CCE":
-            case "MRE":
-            case "BME":
-            case "EME":
-            case "CAE":
-                return true;
-            default:
-                return false;
-        }
-    }
 
     public boolean validateGPA(String gpa) {
         if (gpa == null || gpa.trim().isEmpty()) {

@@ -1,4 +1,6 @@
+9022,Habiba Mohamed,18,Male,CAE,3.30
 9340,Abd ElRahman ElSharnouby,21,Male,CCE,3.3
+9366,Youssef Islam,21,Male,BME,3.50
 9384,Youssef Mohamed,21,Male,CCE,3.8
-9653,Hoda Hany,20,Female,CCE,3.5
-9779,Ahmed El Mitwally,20,Male,CCE,3.51
+9653,Hoda Hany,25,Female,EME,3.50
+9779,Ahmed El Mitwally,20,Male,MRE,3.51

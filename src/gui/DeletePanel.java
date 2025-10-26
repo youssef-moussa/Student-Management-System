@@ -85,7 +85,7 @@ public class DeletePanel extends JFrame {
         backButton = new JButton("Back to Dashboard");
         bottomPanel.add(backButton);
 
-        // Add all panels to frame
+        // Add all panels to the frame
         add(topPanel, BorderLayout.NORTH);
         add(middlePanel, BorderLayout.CENTER);
         add(scrollPane, BorderLayout.CENTER);

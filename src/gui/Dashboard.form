@@ -86,7 +86,8 @@
           <grid row="7" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
-          <background color="-2228993"/>
+          <background color="-1550"/>
+          <contentAreaFilled value="false"/>
           <foreground color="-16580351"/>
           <hideActionText value="false"/>
           <text value="Exit to desktop"/>
