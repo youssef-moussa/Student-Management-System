@@ -21,7 +21,6 @@ public class DeletePanel extends JFrame {
     private JRadioButton searchByIDRadio;
     private JRadioButton searchByNameRadio;
     private JButton searchButton;
-
     private StudentDatabase db;
     private Dashboard dashboard;
 

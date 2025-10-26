@@ -1,5 +1,4 @@
 9340,Abd ElRahman ElSharnouby,21,Male,CCE,3.3
 9384,Youssef Mohamed,21,Male,CCE,3.8
-9600,Hassan Cappucino,20,Male,MRE,3.4
 9653,Hoda Hany,20,Female,CCE,3.5
 9779,Ahmed El Mitwally,20,Male,CCE,3.51
