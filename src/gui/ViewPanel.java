@@ -13,9 +13,21 @@ public class ViewPanel extends JFrame {
     private DefaultTableModel tableModel;
     private JButton sortByIDButton;
     private JButton sortByNameButton;
+    private JButton sortByGPAButton;
     private JButton backButton;
     private StudentDatabase db;
     private Dashboard dashboard;
+    private JTextField gpaFromField;
+    private JTextField gpaToField;
+    private JButton filterButton;
+    private JButton clearFilterButton;
+
+    private boolean ascendingID = true;
+    private boolean ascendingName = true;
+    private boolean ascendingGPA = true;
+
+
+
 
     public ViewPanel(StudentDatabase db, Dashboard dashboard) {
         this.db = db;
@@ -28,10 +40,28 @@ public class ViewPanel extends JFrame {
 
         // Top panel for sorting buttons
         JPanel topPanel = new JPanel();
-        sortByIDButton = new JButton("Sort by ID");
-        sortByNameButton = new JButton("Sort by Name");
+        sortByIDButton = new JButton("Sort by ID ↑");
+        sortByNameButton = new JButton("Sort by Name ↑");
+        sortByGPAButton = new JButton("Sort by GPA ↑");
         topPanel.add(sortByIDButton);
         topPanel.add(sortByNameButton);
+        topPanel.add(sortByGPAButton);
+
+         //GPA Filter panel
+        JPanel filterPanel = new JPanel();
+        filterPanel.setBorder(BorderFactory.createTitledBorder("GPA Filter"));
+        filterPanel.add(new JLabel("From:"));
+        gpaFromField = new JTextField(4);
+        filterPanel.add(gpaFromField);
+        filterPanel.add(new JLabel("To:"));
+        gpaToField = new JTextField(4);
+        filterPanel.add(gpaToField);
+        filterButton = new JButton("Filter");
+        filterPanel.add(filterButton);
+        clearFilterButton = new JButton("Clear");
+        filterPanel.add(clearFilterButton);
+
+        topPanel.add(filterPanel); // Add filter panel to top panel
 
         // Table model and JTable
         tableModel = new DefaultTableModel();
@@ -56,13 +86,34 @@ public class ViewPanel extends JFrame {
         loadTableData(db.returnAllRecords());
 
         sortByIDButton.addActionListener(e -> {
-            db.SortByID();
+            db.SortByID(ascendingID);
+            ascendingID = !ascendingID;
             loadTableData(db.returnAllRecords());
+            sortByIDButton.setText(ascendingID ? "Sort by ID ↑" : "Sort by ID ↓");
         });
 
         sortByNameButton.addActionListener(e -> {
-            db.SortByName();
+            db.SortByName(ascendingName);
+            ascendingName = !ascendingName;
             loadTableData(db.returnAllRecords());
+            sortByNameButton.setText(ascendingName ? "Sort by Name ↑" : "Sort by Name ↓");
+        });
+
+        sortByGPAButton.addActionListener(e -> {
+            db.SortByGPA(ascendingGPA);
+            ascendingGPA = !ascendingGPA;
+            loadTableData(db.returnAllRecords());
+            sortByGPAButton.setText(ascendingGPA ? "Sort by GPA ↑" : "Sort by GPA ↓");
+        });
+
+        //Filter button action
+        filterButton.addActionListener(e -> {
+            applyGPAFilter();
+        });
+
+        //Clear filter button action
+        clearFilterButton.addActionListener(e -> {
+            clearGPAFilter();
         });
 
         backButton.addActionListener(e -> {
@@ -85,5 +136,65 @@ public class ViewPanel extends JFrame {
                     s.getGPA()
             });
         }
+    }
+
+    //GPA Filter method
+    private void applyGPAFilter() {
+        String fromText = gpaFromField.getText().trim();
+        String toText = gpaToField.getText().trim();
+
+        double fromGPA = 0.0;
+        double toGPA = 4.0;
+
+        // Parse "From" value
+        if (!fromText.isEmpty()) {
+            try {
+                fromGPA = Double.parseDouble(fromText);
+                if (fromGPA < 0.0 || fromGPA > 4.0) {
+                    JOptionPane.showMessageDialog(this, "From GPA must be between 0.0 and 4.0");
+                    return;
+                }
+            } catch (NumberFormatException e) {
+                JOptionPane.showMessageDialog(this, "Invalid From GPA value. Please enter a valid number.");
+                return;
+            }
+        }
+
+        // Parse "To" value
+        if (!toText.isEmpty()) {
+            try {
+                toGPA = Double.parseDouble(toText);
+                if (toGPA < 0.0 || toGPA > 4.0) {
+                    JOptionPane.showMessageDialog(this, "To GPA must be between 0.0 and 4.0");
+                    return;
+                }
+            } catch (NumberFormatException e) {
+                JOptionPane.showMessageDialog(this, "Invalid To GPA value. Please enter a valid number.");
+                return;
+            }
+        }
+
+        // Validate range
+        if (fromGPA > toGPA) {
+            JOptionPane.showMessageDialog(this, "From GPA cannot be greater than To GPA");
+            return;
+        }
+
+        // Filter students based on GPA range
+        ArrayList<Student> filteredStudents = new ArrayList<>();
+        for (Student student : db.returnAllRecords()) {
+                double studentGPA = Double.parseDouble(student.getGPA());
+                if (studentGPA >= fromGPA && studentGPA <= toGPA) {
+                    filteredStudents.add(student);
+                }
+        }
+        loadTableData(filteredStudents);
+    }
+
+    //Clear filter method
+    private void clearGPAFilter() {
+        gpaFromField.setText("");
+        gpaToField.setText("");
+        loadTableData(db.returnAllRecords());
     }
 }

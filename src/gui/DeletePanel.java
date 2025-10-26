@@ -15,15 +15,12 @@ import java.util.ArrayList;
 public class DeletePanel extends JFrame {
     private JTable studentTable;
     private DefaultTableModel tableModel;
-    private JButton sortByIDButton;
-    private JButton sortByNameButton;
     private JButton backButton;
     private JButton cancelSearchButton;
     private JTextField searchField;
     private JRadioButton searchByIDRadio;
     private JRadioButton searchByNameRadio;
     private JButton searchButton;
-
     private StudentDatabase db;
     private Dashboard dashboard;
 
@@ -57,10 +54,7 @@ public class DeletePanel extends JFrame {
 
         // Middle Panel for Sorting
         JPanel middlePanel = new JPanel();
-        sortByIDButton = new JButton("Sort by ID");
-        sortByNameButton = new JButton("Sort by Name");
-        middlePanel.add(sortByIDButton);
-        middlePanel.add(sortByNameButton);
+
 
         // Table with Delete buttons
         tableModel = new DefaultTableModel(new String[]{"ID", "Name", "Age", "Gender", "Dept", "GPA", "Action"}, 0) {
@@ -91,7 +85,7 @@ public class DeletePanel extends JFrame {
         backButton = new JButton("Back to Dashboard");
         bottomPanel.add(backButton);
 
-        // Add all panels to frame
+        // Add all panels to the frame
         add(topPanel, BorderLayout.NORTH);
         add(middlePanel, BorderLayout.CENTER);
         add(scrollPane, BorderLayout.CENTER);
@@ -128,16 +122,6 @@ public class DeletePanel extends JFrame {
             loadTableData(db.returnAllRecords());
         });
 
-        // Sorting functionality
-        sortByIDButton.addActionListener(e -> {
-            db.SortByID();
-            loadTableData(db.returnAllRecords());
-        });
-
-        sortByNameButton.addActionListener(e -> {
-            db.SortByName();
-            loadTableData(db.returnAllRecords());
-        });
 
         // Back button
         backButton.addActionListener(e -> {
