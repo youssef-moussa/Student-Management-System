@@ -24,7 +24,7 @@ public class StudentDatabase {
 
         Student student = new Student(finalID, Name, Age, Gender, Department, GPA);
         insertRecord(student);
-        SortByID();
+        SortByID(true);
         saveToFile();
     }
 
@@ -49,7 +49,7 @@ public class StudentDatabase {
         records = new ArrayList<>();
         filename = "src/Model/students.txt";
         readFromFile();
-        SortByID();
+        SortByID(true);
     }
     
     public void readFromFile(){
@@ -146,17 +146,16 @@ public class StudentDatabase {
         }
     }
 
-    public void SortByName(){
+    public void SortByName(boolean ascending){
         int n = records.size();
         for (int i = 0; i < n - 1; i++) {
             for (int j = 0; j < n - i - 1; j++) {
-                Student s1 = records.get(j);
-                Student s2 = records.get(j + 1);
+                String name1 = records.get(j).getFullName().trim().toLowerCase();
+                String name2 = records.get(j + 1).getFullName().trim().toLowerCase();
 
-                String name1 = s1.getFullName().trim().toLowerCase();
-                String name2 = s2.getFullName().trim().toLowerCase();
+                boolean swap = ascending ? name1.compareTo(name2) > 0 : name1.compareTo(name2) < 0;
 
-                if (name1.compareTo(name2) > 0) {
+                if (swap) {
                     Student temp = records.get(j);
                     records.set(j, records.get(j + 1));
                     records.set(j + 1, temp);
@@ -165,17 +164,34 @@ public class StudentDatabase {
         }
     }
 
-    public void SortByID(){
+    public void SortByID(boolean ascending){
         int n = records.size();
         for (int i = 0; i < n - 1; i++) {
             for (int j = 0; j < n - i - 1; j++) {
-                Student s1 = records.get(j);
-                Student s2 = records.get(j + 1);
+                int id1 = Integer.parseInt(records.get(j).getStudentID());
+                int id2 = Integer.parseInt(records.get(j + 1).getStudentID());
 
-                int id1 = Integer.parseInt(s1.getStudentID());
-                int id2 = Integer.parseInt(s2.getStudentID());
+                boolean swap = ascending ? id1 > id2 : id1 < id2;
 
-                if (id1 > id2) {
+                if (swap) {
+                    Student temp = records.get(j);
+                    records.set(j, records.get(j + 1));
+                    records.set(j + 1, temp);
+                }
+            }
+        }
+    }
+
+    public void SortByGPA(boolean ascending){
+        int n = records.size();
+        for (int i = 0; i < n - 1; i++) {
+            for (int j = 0; j < n - i - 1; j++) {
+                double n1 = Double.parseDouble(records.get(j).getGPA());
+                double n2 = Double.parseDouble(records.get(j + 1).getGPA());
+
+                boolean swap = ascending ? n1 > n2 : n1 < n2;
+
+                if (swap) {
                     Student temp = records.get(j);
                     records.set(j, records.get(j + 1));
                     records.set(j + 1, temp);
@@ -188,7 +204,7 @@ public class StudentDatabase {
         for (int i = 0; i < records.size(); i++) {
             if (records.get(i).getStudentID().equals(student.getStudentID())) {
                 records.set(i, student);
-                SortByID();
+                SortByID(true);
                 saveToFile();
                 return;
             }
@@ -200,7 +216,7 @@ public class StudentDatabase {
             return;
         }
         deleteRecord(id);
-        SortByID();
+        SortByID(true);
         saveToFile();
     }
 

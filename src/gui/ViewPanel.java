@@ -13,9 +13,14 @@ public class ViewPanel extends JFrame {
     private DefaultTableModel tableModel;
     private JButton sortByIDButton;
     private JButton sortByNameButton;
+    private JButton sortByGPAButton;
     private JButton backButton;
     private StudentDatabase db;
     private Dashboard dashboard;
+
+    private boolean ascendingID = true;
+    private boolean ascendingName = true;
+    private boolean ascendingGPA = true;
 
     public ViewPanel(StudentDatabase db, Dashboard dashboard) {
         this.db = db;
@@ -28,10 +33,12 @@ public class ViewPanel extends JFrame {
 
         // Top panel for sorting buttons
         JPanel topPanel = new JPanel();
-        sortByIDButton = new JButton("Sort by ID");
-        sortByNameButton = new JButton("Sort by Name");
+        sortByIDButton = new JButton("Sort by ID ↑");
+        sortByNameButton = new JButton("Sort by Name ↑");
+        sortByGPAButton = new JButton("Sort by GPA ↑");
         topPanel.add(sortByIDButton);
         topPanel.add(sortByNameButton);
+        topPanel.add(sortByGPAButton);
 
         // Table model and JTable
         tableModel = new DefaultTableModel();
@@ -55,14 +62,26 @@ public class ViewPanel extends JFrame {
         // Load initial student data
         loadTableData(db.returnAllRecords());
 
+
         sortByIDButton.addActionListener(e -> {
-            db.SortByID();
+            db.SortByID(ascendingID);
+            ascendingID = !ascendingID;
             loadTableData(db.returnAllRecords());
+            sortByIDButton.setText(ascendingID ? "Sort by ID ↑" : "Sort by ID ↓");
         });
 
         sortByNameButton.addActionListener(e -> {
-            db.SortByName();
+            db.SortByName(ascendingName);
+            ascendingName = !ascendingName;
             loadTableData(db.returnAllRecords());
+            sortByNameButton.setText(ascendingName ? "Sort by Name ↑" : "Sort by Name ↓");
+        });
+
+        sortByGPAButton.addActionListener(e -> {
+            db.SortByGPA(ascendingGPA);
+            ascendingGPA = !ascendingGPA;
+            loadTableData(db.returnAllRecords());
+            sortByGPAButton.setText(ascendingGPA ? "Sort by GPA ↑" : "Sort by GPA ↓");
         });
 
         backButton.addActionListener(e -> {
