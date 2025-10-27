@@ -1,4 +1,5 @@
 9022,Habiba Mohamed,18,Male,CAE,3.30
+9082,Yassin Khaled Ibrahim,21,Male,CCE,3.48
 9102,Youssef Mohamed,22,Male,CCE,3.00
 9300,Ahmed,23,Female,CCE,3.00
 9340,Abd ElRahman ElSharnouby,21,Male,CCE,3.3
