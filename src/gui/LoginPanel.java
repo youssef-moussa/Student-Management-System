@@ -24,6 +24,22 @@ public class LoginPanel extends JFrame {
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setResizable(true);
         setVisible(true);
+
+        usernameTextField.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                passwordField.requestFocusInWindow();
+            }
+        });
+
+        passwordField.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                LoginBtn.doClick(); // Simulates pressing the button
+            }
+        });
+
+
         LoginBtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {

@@ -4,3 +4,4 @@
 9384,Youssef Mohamed,21,Male,CCE,3.8
 9653,Hoda Hany,25,Female,EME,3.50
 9779,Ahmed El Mitwally,20,Male,MRE,3.51
+9878,Youssef,45,Male,CCE,3.00

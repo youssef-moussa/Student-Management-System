@@ -76,10 +76,15 @@ public class AddPanel extends JFrame {
                 return;
             }
 
+            if(!MaleBtn.isSelected()&&!FemaleBtn.isSelected()){
+                JOptionPane.showMessageDialog(Container, "Please fill in Male/Female!");
+                return;
+            }
             if(!db.validateGPA(gpa)){
                 JOptionPane.showMessageDialog(Container, "Invalid GPA!");
                 return;
             }
+
 
             // Create and add student
             db.AddStudent(id,name,age,gender,dept,gpa);
